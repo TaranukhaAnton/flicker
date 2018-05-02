@@ -1,0 +1,48 @@
+server:
+  port: 9999
+  use-forward-headers: true
+
+spring:
+  application:
+    name: zuul
+
+zuul:
+  host:
+    socket-timeout-millis: 60000
+  add-host-header: true
+  add-proxy-headers: true
+  routes:
+    authorization:
+      path: /uaa/**
+      service-id: authorization
+      sensitiveHeaders:
+      url: http://@auth-service-host@:18080/
+      strip-prefix: false
+    message-service:
+      path: /api/v1/messages/**
+      service-id: message-service
+      sensitiveHeaders:
+      url: http://@message-service-host@:8080/
+      strip-prefix: false
+    user-service:
+      path: /api/v1/users/**
+      service-id: user-service
+      sensitiveHeaders:
+      url: http://@user-service-host@:8081/
+      strip-prefix: false
+    websocket:
+        path: /ws/**
+        serviceId: message-service
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://@eureka-service-host@:8761/eureka
+
+application:
+  filter:
+    prefix: /api/v1/users
+    suffix: /my
+    method: GET
+
+
