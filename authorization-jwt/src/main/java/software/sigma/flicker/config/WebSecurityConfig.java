@@ -16,8 +16,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-/*    @Autowired
-    private AuthenticationManager authenticationManager;*/
 
     @Autowired
     private UserDetailsService customUserDetailsService;
@@ -27,32 +25,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.parentAuthenticationManager(authenticationManagerBean())
                 .userDetailsService(customUserDetailsService);
     }
-
-
-
- /*   @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserDetailsService customUserDetailsService;*/
-
-
-
-/*    @Autowired
-    public void globalUserDetails(final AuthenticationManagerBuilder auth) throws Exception {
-        // @formatter:off
-	auth.inMemoryAuthentication()
-	  .withUser("john").password("123").roles("USER").and()
-	  .withUser("tom").password("111").roles("ADMIN").and()
-	  .withUser("user1").password("pass").roles("USER").and()
-	  .withUser("admin").password("nimda").roles("ADMIN");
-    }// @formatter:on*/
-
-/*    @Autowired
-    protected void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-        auth.parentAuthenticationManager(authenticationManager)
-                .userDetailsService(customUserDetailsService);
-    }*/
 
 
     @Override

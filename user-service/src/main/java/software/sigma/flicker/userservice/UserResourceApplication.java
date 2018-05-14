@@ -15,25 +15,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 @SuppressWarnings({"HideUtilityClassConstructor", "JavadocMethod"})
 @SpringBootApplication
 @EnableEurekaClient
-
 @EnableAutoConfiguration
-
-
-
-public class UserResourceApplication extends ResourceServerConfigurerAdapter {
+public class UserResourceApplication  {
 
     public static void main(String[] args) {
         SpringApplication.run(UserResourceApplication.class, args);
     }
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/api/v1/users/my**").access("#oauth2.hasScope('read')")
-                .antMatchers(HttpMethod.PUT, "/api/v1/users/my**").access("#oauth2.hasScope('read')");
-    }
 }

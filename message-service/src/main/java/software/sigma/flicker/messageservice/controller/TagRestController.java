@@ -39,7 +39,7 @@ public class TagRestController {
     /**
      * Returns the specified number of tags sorted by the field 'used'.
      *
-     * @param number number of tags
+     * @param count count of tags
      * @return tags
      */
     @ApiOperation(value = "Get most popular tags", httpMethod = "GET", responseContainer = "List", response = String.class,
@@ -48,9 +48,9 @@ public class TagRestController {
     @RequestMapping(method = RequestMethod.GET)
     public List<String> getHottestTags(
             @ApiParam(value = "Number of tags.", required = false, defaultValue = DEFAULT_TAG_SIZE)
-            @RequestParam(value = "number", required = false, defaultValue = DEFAULT_TAG_SIZE) Integer number) {
+            @RequestParam(value = "count", required = false, defaultValue = DEFAULT_TAG_SIZE) Integer count) {
 
-        Pageable pageRequest = new PageRequest(0, number, new Sort(Sort.Direction.DESC, SORTED_FIELD));
+        Pageable pageRequest = new PageRequest(0, count, new Sort(Sort.Direction.DESC, SORTED_FIELD));
         List<Tag> tags = tagRepository.findAll(pageRequest).getContent();
         return tags.stream().map(Tag::getName).collect(Collectors.toList());
     }

@@ -24,6 +24,6 @@ public interface UserFeignService {
      * @return user
      */
     @RequestMapping(method = RequestMethod.GET, value = "/api/v1/users")
-    User getByUsername(@RequestHeader(AUTH_TOKEN) String oruToken, @RequestParam(value = "username") String username);
+    User getByUsername(@RequestHeader(AUTH_TOKEN) String authToken, @RequestParam(value = "username") String username);
 
 }
